@@ -29,6 +29,7 @@ $navLogin.on('click', navLoginClick);
 function submitStoryClick(evt) {
 	console.debug('submitStoryClick', evt);
 	hidePageComponents();
+	$allStoriesList.show();
 	$storiesForm.show();
 }
 

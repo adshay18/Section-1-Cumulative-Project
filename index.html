@@ -49,6 +49,29 @@
   </div>
 </nav>
 
+<!--Submit story forms-->
+<section class="stories-form-container container">
+  <form
+  action="#"
+  id="stories-form"
+  class="account-form hidden"
+  method="post">
+  <h4>Submit New Story</h4>
+  <div class="stories-input">
+    <label for="stories-title">title</label>
+    <input id="stories-title">
+  </div>
+  <div class="stories-input">
+    <label for="stories-author">author</label>
+    <input id="stories-author">
+  </div>
+  <div class="stories-input">
+    <label for="stories-url">url</label>
+    <input id="stories-url">
+  </div>
+  <button type="submit">add story</button>
+</form>
+</section>
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
 
@@ -101,30 +124,7 @@
   </form>
 </section>
 
-<!--NavBar forms-->
-<section class="stories-form-container container">
-  <!--Submit Story-->
-  <form
-  action="#"
-  id="stories-form"
-  class="account-form hidden"
-  method="post">
-  <h4>Submit New story</h4>
-  <div class="stories-input">
-    <label for="stories-title">title</label>
-    <input id="stories-title">
-  </div>
-  <div class="stories-input">
-    <label for="stories-author">author</label>
-    <input id="stories-author">
-  </div>
-  <div class="stories-input">
-    <label for="stories-url">url</label>
-    <input id="stories-url">
-  </div>
-  <button type="submit">add story</button>
-</form>
-</section>
+
 
 <!-- Library JS & our JS -->
 <script src="https://unpkg.com/jquery"></script>
