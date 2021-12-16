@@ -42,6 +42,8 @@ function openFavorites(evt) {
 	putFavoritesOnPage();
 }
 
+$navFavorites.on('click', openFavorites);
+
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {

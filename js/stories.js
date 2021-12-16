@@ -92,10 +92,13 @@ $storiesForm.on('submit', submitStory);
 function putFavoritesOnPage() {
 	console.debug('putFavoritesOnPage');
 	$favoriteStories.empty();
-
-	for (let i = 0; i < currentUser.favorites; i++) {
-		const $generatedStory = generateStoryMarkup(currentUser.favorites[i]);
-		$favoriteStories.append($generatedStory);
+	if (currentUser.favorites.length !== 0) {
+		for (let story of currentUser.favorites) {
+			const $generatedStory = generateStoryMarkup(story);
+			$favoriteStories.append($generatedStory);
+		}
+	} else {
+		$favoriteStories.append('<p>No favorites yet! Try starring some articles you like.</p>');
 	}
 
 	$favoriteStories.show();
