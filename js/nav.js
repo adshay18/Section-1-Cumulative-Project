@@ -39,6 +39,7 @@ $navSubmit.on('click', submitStoryClick);
 function openFavorites(evt) {
 	console.debug('openFavorites', evt);
 	hidePageComponents();
+	putFavoritesOnPage();
 }
 
 /** When a user first logins in, update the navbar to reflect that. */
