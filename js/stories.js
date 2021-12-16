@@ -12,6 +12,16 @@ async function getAndShowStoriesOnStart() {
 	putStoriesOnPage();
 }
 
+//Create HTML Star for favorites
+function makeStar(story, user) {
+	const favorite = user.checkForFavorite(story);
+	const starType = favorite ? 'fas' : 'far';
+	return `
+      <span class="star">
+        <i class="${starType} fa-star"></i>
+      </span>`;
+}
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -23,8 +33,11 @@ function generateStoryMarkup(story) {
 	// console.debug("generateStoryMarkup", story);
 
 	const hostName = story.getHostName();
+	const generateStar = Boolean(currentUser);
+
 	return $(`
       <li id="${story.storyId}">
+        ${generateStar ? makeStar(story, currentUser) : ''}
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -74,3 +87,36 @@ async function submitStory(evt) {
 }
 //add listener for when story is bumitted
 $storiesForm.on('submit', submitStory);
+
+//add functionality for showing favorites on page
+function putFavoritesOnPage() {
+	console.debug('putFavoritesOnPage');
+	$favoriteStories.empty();
+
+	for (let i = 0; i < currentUser.favorites; i++) {
+		const $generatedStory = generateStoryMarkup(currentUser.favorites[i]);
+		$favoriteStories.append($generatedStory);
+	}
+
+	$favoriteStories.show();
+}
+
+//run functions to change star and add or remove from favorite list
+async function toggleFavorite(evt) {
+	console.debug('toggleFavorite');
+
+	const $tgt = $(evt.target);
+	const $story = $tgt.closest('li');
+	const storyId = $story.attr('id');
+	const story = storyList.stories.find((s) => s.storyId === storyId);
+
+	if ($tgt.hasClass('fas')) {
+		await currentUser.removeFavorite(story);
+		$tgt.closest('i').toggleClass('fas far');
+	} else {
+		await currentUser.addFavorite(story);
+		$tgt.closest('i').toggleClass('fas far');
+	}
+}
+
+$allStoriesList.on('click', '.star', toggleFavorite);

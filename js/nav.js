@@ -35,6 +35,12 @@ function submitStoryClick(evt) {
 
 $navSubmit.on('click', submitStoryClick);
 
+//show favorites of user when clicking on favorites link
+function openFavorites(evt) {
+	console.debug('openFavorites', evt);
+	hidePageComponents();
+}
+
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {
