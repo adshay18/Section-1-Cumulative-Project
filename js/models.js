@@ -193,4 +193,34 @@ class User {
 			return null;
 		}
 	}
+	async addFavorite(story) {
+		console.debug('addFavorite');
+		this.favorites.push(story);
+		await this.favoriteClick('favorite', story);
+	}
+
+	async removeFavorite(story) {
+		console.debug('removeFavorite');
+		this.favorites = this.favorites.filter(function(favs) {
+			return favs.storyId !== story.storyId;
+		});
+		await this.favoriteClick('unfavorite', story);
+	}
+
+	async favoriteClick(status, story) {
+		const method = status === 'favorite' ? 'POST' : 'DELETE';
+		const token = this.loginToken;
+		const id = story.storyId;
+		await axios({
+			method: method,
+			url: `${BASE_URL}/users/${this.username}/favorites/${id}`,
+			data: { token }
+		});
+	}
+
+	checkForFavorite(story) {
+		return this.favorites.some(function(favs) {
+			return favs.storyId === story.storyId;
+		});
+	}
 }
