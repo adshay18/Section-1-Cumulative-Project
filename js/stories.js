@@ -85,8 +85,15 @@ async function submitStory(evt) {
 	$('#stories-url').val('');
 	$storiesForm.hide();
 }
-//add listener for when story is bumitted
-$storiesForm.on('submit', submitStory);
+//add listener for when story is bumitted, or to close the form
+$('#submit-story').on('click', submitStory);
+$('#close-submit').on('click', function(e) {
+	e.preventDefault();
+	$('#stories-title').val('');
+	$('#stories-author').val('');
+	$('#stories-url').val('');
+	$storiesForm.hide();
+});
 
 //add functionality for showing favorites on page
 function putFavoritesOnPage() {
