@@ -42,7 +42,10 @@ function generateStoryMarkup(story) {
 
 	const hostName = story.getHostName();
 	const generateStar = Boolean(currentUser);
-	const generateDelete = Boolean(currentUser);
+	let generateDelete = false;
+	if (story.username === currentUser.username) {
+		generateDelete = true;
+	}
 
 	return $(`
       <li id="${story.storyId}">
@@ -140,3 +143,17 @@ async function toggleFavorite(evt) {
 }
 
 $allStoriesList.on('click', '.star', toggleFavorite);
+
+//add listener to delete story
+async function deleteByStoryId(evt) {
+	console.debug('deleteByStoryId');
+
+	const $tgt = $(evt.target);
+	const $story = $tgt.closest('li');
+	const storyId = $story.attr('id');
+	await storyList.deleteStory(currentUser, storyId);
+
+	await putStoriesOnPage();
+}
+
+$allStoriesList.on('click', '.delete-icon', deleteByStoryId);

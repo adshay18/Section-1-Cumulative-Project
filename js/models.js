@@ -88,7 +88,7 @@ class StoryList {
 		const token = currentUser.loginToken;
 		await axios({
 			method: 'DELETE',
-			data: { token: user.loginToken },
+			data: { token: currentUser.loginToken },
 			url: `${BASE_URL}/stories/${storyId}`
 		});
 
