@@ -51,5 +51,6 @@ function updateNavOnLogin() {
 	$('.nav-actions').show();
 	$navLogin.hide();
 	$navLogOut.show();
+	$('.account-forms-container').hide();
 	$navUserProfile.text(`${currentUser.username}`).show();
 }
