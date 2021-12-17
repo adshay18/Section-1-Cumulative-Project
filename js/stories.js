@@ -22,6 +22,14 @@ function makeStar(story, user) {
       </span>`;
 }
 
+//create HTML delete button for a logged in user
+function deleteIcon() {
+	return `
+		<span class="delete-icon">
+			<i class="fas fa-ban"></i>
+		</span>`;
+}
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -34,10 +42,12 @@ function generateStoryMarkup(story) {
 
 	const hostName = story.getHostName();
 	const generateStar = Boolean(currentUser);
+	const generateDelete = Boolean(currentUser);
 
 	return $(`
       <li id="${story.storyId}">
         ${generateStar ? makeStar(story, currentUser) : ''}
+		${generateDelete ? deleteIcon() : ''}
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
